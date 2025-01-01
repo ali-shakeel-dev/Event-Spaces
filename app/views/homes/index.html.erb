@@ -1,27 +1,37 @@
+<% content_for :title, "Find the Perfect Event Space | Book Unique Venues for Your Events" %>
+<% content_for :description, "Browse and book the ideal venue for weddings, parties, conferences, and more. Discover unique venues with easy booking on our Event Spaces app." %>
+
 <section class="py-4 w-full">
-  <span class="flex gap-4 items-center justify-center py-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-    <span class="text-center block max-w-sm p-4 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="text-center p-6 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">Browse Venues</h5>
+      <p class="text-gray-700 dark:text-gray-400">
+        Find venues for weddings, parties, and meetings in one place.
+      </p>
+    </div>
 
-      <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">Browse</h5>
-      <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-    </span>
+    <div class="text-center p-6 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">Book Spaces</h5>
+      <p class="text-gray-700 dark:text-gray-400">
+        Book event spaces easily with no hidden fees or extra charges.
+      </p>
+    </div>
 
+    <div class="text-center p-6 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">List Your Space</h5>
+      <p class="text-gray-700 dark:text-gray-400">
+        List your venue and start earning by showcasing it to planners.
+      </p>
+    </div>
 
-    <span class="text-center block max-w-sm p-4 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-      <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">Save</h5>
-      <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-    </span>
-
-
-    <span class="text-center block max-w-sm p-4 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-      <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">Book</h5>
-      <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-    </span>
-
-  </span>
+    <div class="text-center p-6 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">Plan Events</h5>
+      <p class="text-gray-700 dark:text-gray-400">
+        Manage bookings, check availability, and organize events with ease.
+      </p>
+    </div>
+  </div>
 </section>
 
 <section class="py-4 w-full">
@@ -164,16 +174,18 @@
         <div class="h-full overflow-hidden border-2 border-gray-200 rounded-lg shadow-md hover:shadow-xl border-opacity-60">
           <a>
             <!-- Slides -->
-            <div id="carousel-1" class="relative flex overflow-hidden h-56">
-              <img src="https://thumbs.dreamstime.com/b/wedding-reception-barn-25296438.jpg" class="w-full object-cover hidden carousel-image" alt="Space Image">
-              <img src="https://media-cdn.tripadvisor.com/media/photo-s/0c/bb/a3/97/predator-ride-in-the.jpg" class="w-full object-cover hidden carousel-image" alt="Space Image">
-              <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/d9/fa/09/meet-and-greet.jpg?w=900&h=500&s=1" class="w-full object-cover hidden carousel-image" alt="Space Image">
-              <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/66610504/2636936256.jpg" class="w-full object-cover hidden carousel-image" alt="Space Image">
-              <img src="https://platinumlist.net/guide/wp-content/uploads/2023/03/8359_img_worlds_of_adventure-big1613913137.jpg-1024x683.webp" class="w-full object-cover hidden carousel-image" alt="Space Image">
+            <div id="carousel-<%= space.id %>" class="relative flex overflow-hidden h-56">
+              <% if space.images.attached? %>
+              <% space.images.each do |image| %>
+              <img src="<%= url_for(image) %>" class="w-full object-cover hidden carousel-image" alt="Space Image">
+              <% end %>
+              <% else %>
+              <p>No images available</p>
+              <% end %>
 
               <!-- Navigation Buttons -->
-              <button id="prevSlide" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2">‹</button>
-              <button id="nextSlide" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2">›</button>
+              <button id="prevSlide" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-3 py-2">‹</button>
+              <button id="nextSlide" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-3 py-2">›</button>
             </div>
           </a>
           <div class="p-6">
@@ -227,88 +239,31 @@
 </section>
 
 <script>
- 
+  const carousels = document.querySelectorAll('[id^="carousel-"]');
 
-  const carousels = document.querySelectorAll('[id^=carousel-]');
-
-  carousels.forEach(carousel => {
-    const slides = carousel.querySelectorAll('.carousel-image');
+  carousels.forEach((carousel) => {
+    const images = carousel.querySelectorAll('.carousel-image');
     let currentIndex = 0;
 
-    // Show the first slide initially
-    slides.forEach(slide => slide.classList.add('hidden')); // Hide all slides
-    slides[currentIndex].classList.remove('hidden'); // Show first slide
+    function showImage(index) {
+      images.forEach((image, idx) => {
+        image.classList.toggle('hidden', idx !== index);
+      });
+    }
 
-    // Buttons
-    let prevButton = carousel.querySelector('#prevSlide');
-    let nextButton = carousel.querySelector('#nextSlide');
+    showImage(currentIndex);
 
-    // Next Slide Function
-    const nextSlide = () => {
-      slides[currentIndex].classList.add('hidden');
-      currentIndex = (currentIndex + 1) % slides.length;
-      slides[currentIndex].classList.remove('hidden');
-    };
+    const prevButton = carousel.querySelector('#prevSlide');
+    const nextButton = carousel.querySelector('#nextSlide');
 
-    // Previous Slide Function
-    const prevSlide = () => {
-      slides[currentIndex].classList.add('hidden');
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      slides[currentIndex].classList.remove('hidden');
-    };
-
-    // Attach event listeners to buttons
-    if (prevButton) prevButton.addEventListener('click', prevSlide);
-    if (nextButton) nextButton.addEventListener('click', nextSlide);
-
-    // Mouse drag to slide functionality
-    let isDragging = false;
-    let startX, scrollLeft;
-
-    carousel.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.pageX - carousel.offsetLeft;
-      scrollLeft = carousel.scrollLeft;
-      carousel.style.cursor = 'grabbing';
+    prevButton.addEventListener('click', function() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
     });
 
-    carousel.addEventListener('mouseleave', () => {
-      isDragging = false;
-      carousel.style.cursor = 'default';
-    });
-
-    carousel.addEventListener('mouseup', () => {
-      isDragging = false;
-      carousel.style.cursor = 'default';
-    });
-
-    carousel.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const x = e.pageX - carousel.offsetLeft;
-      const walk = (x - startX) * 3; // Scroll speed
-      carousel.scrollLeft = scrollLeft - walk;
-    });
-
-    // Optional: Detect swipe on touch devices (mobile/tablets)
-    let startTouchX;
-
-    carousel.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      startTouchX = e.touches[0].clientX;
-    });
-
-    carousel.addEventListener('touchend', () => {
-      isDragging = false;
-    });
-
-    carousel.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const moveTouchX = e.touches[0].clientX;
-      const distance = moveTouchX - startTouchX;
-      if (distance > 50) nextSlide();
-      if (distance < -50) prevSlide();
+    nextButton.addEventListener('click', function() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
     });
   });
 

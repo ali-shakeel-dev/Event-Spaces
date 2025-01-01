@@ -2,7 +2,9 @@
 <html>
 
 <head>
-  <title><%= content_for(:title) || "Eventspaces" %></title>
+  <title><%= content_for(:title) || "Event Spaces" %></title>
+  <meta name="description" content="<%= content_for(:description) || "Discover a wide range of event spaces for all types of occasions. Browse and book the ideal venue for weddings, parties, conferences, and more. Explore unique venues and easy booking with our Event Spaces app." %>">
+  <%= favicon_link_tag 'favicon.png' %> 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
@@ -13,7 +15,6 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icon.png">
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= stylesheet_link_tag "trix" %>
   <%= javascript_importmap_tags %>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
